@@ -7,7 +7,7 @@ SimpleTrack - a time tracking solution for students and freelancer
 
 | Role             | Name                  | 
 | :---             |    :----:             |
-| **Product Owner**|   Haubiter, Rene       |
+| **Product Owner**|   Haubitzer, Rene       |
 | **Scrum Master** |   Sabljica, Bakir       |
 | **Developer**    | Aschauer, Katharina          |
 | **Developer**    | Czerwinka, Kai                |
@@ -15,3 +15,10 @@ SimpleTrack - a time tracking solution for students and freelancer
 | **Developer**    | Schatz, Christoph Josef        |
 | **Developer**    | Steinwender, Philipp        |
 | **Developer**    | Uka, Fluriana        |
+
+
+## Features
+| Title |
+| ----  |
+| None so far |
+
