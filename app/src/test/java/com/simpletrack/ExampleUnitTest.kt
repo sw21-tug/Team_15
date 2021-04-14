@@ -21,9 +21,9 @@ class ExampleUnitTest {
     fun timeCount_isCorrect(){
         val task : Task
 
-        task.start()
+        task.startTime()
         sleep(10)
-        val retval = task.stop()
+        val retval = task.stopTime()
 
         assertEquals(retval, 10)
 
