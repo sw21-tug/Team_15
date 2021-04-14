@@ -3,8 +3,9 @@ package com.simpletrack
 import org.junit.Test
 
 import org.junit.Assert.*
+import java.lang.Thread.sleep
 
-import Task.kt
+import Task
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -19,13 +20,14 @@ class ExampleUnitTest {
 
     @Test
     fun timeCount_isCorrect(){
-        val task : Task
+        val sleepTime : Long = 100
+        val task = Task()
 
         task.startTime()
-        sleep(10)
+        sleep(sleepTime)
         val retval = task.stopTime()
 
-        assertEquals(retval, 10)
+        assertEquals(retval, sleepTime)
 
 
     }
