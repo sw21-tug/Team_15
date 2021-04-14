@@ -11,15 +11,15 @@ class TaskTests {
     
     @Test
     fun timeCount_isCorrect(){
-        val sleepTime : Long = 100
+        val sleepTime : Long = 1000
+        val epsilon : Long = 10
         val task = Task()
 
         task.startTime()
         sleep(sleepTime)
         val retval = task.stopTime()
 
-        assertEquals(sleepTime, retval)
-
+        assert(retval>=sleepTime-epsilon && retval <= sleepTime+epsilon)
     }
 
     @Test
@@ -36,13 +36,27 @@ class TaskTests {
         val task = Task()
 
         task.startTime()
-        var firststart = task.start
+        val firststart = task.start
         sleep(5)
         task.startTime()
 
         assertEquals(firststart, task.start)
     }
 
+    @Test
+    fun stop_twice() {
+        val task = Task()
+
+        task.startTime()
+        sleep(5)
+        task.stopTime()
+        val firststop = task.stop
+
+        sleep(10)
+        task.stopTime()
+
+        assertEquals(firststop, task.stop)
+    }
 
     @Test
     fun isRunningWhileRunning() {

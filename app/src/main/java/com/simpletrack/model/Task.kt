@@ -9,7 +9,9 @@ class Task() {
             private set
 
     fun startTime() {
-        start = Date()
+        if(start == null) {
+            start = Date()
+        }
     }
 
     // returns stopped time in milliseconds
@@ -23,11 +25,11 @@ class Task() {
     }
 
     fun isStopped() : Boolean {
-        return false
+        return start != null && stop != null
     }
 
     fun running() : Boolean {
-        return false
+        return start!= null && stop == null
     }
 
 }
