@@ -22,6 +22,12 @@ class Task() {
         return stop!!.time - start!!.time
     }
 
+    fun isStopped() : Boolean {
+        return false
+    }
 
+    fun running() : Boolean {
+        return false
+    }
 
 }

@@ -18,17 +18,5 @@ class ExampleUnitTest {
         assertEquals(4, 2 + 2)
     }
 
-    @Test
-    fun timeCount_isCorrect(){
-        val sleepTime : Long = 100
-        val task = Task()
 
-        task.startTime()
-        sleep(sleepTime)
-        val retval = task.stopTime()
-
-        assertEquals(retval, sleepTime)
-
-
-    }
 }
