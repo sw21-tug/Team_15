@@ -14,7 +14,6 @@ SimpleTrack - a time tracking solution for students and freelancer
 | **Developer**    | Kerécz, Thomas        |
 | **Developer**    | Schatz, Christoph Josef        |
 | **Developer**    | Steinwender, Philipp        |
-| **Developer**    | Uka, Fluriana        |
 
 
 ## Features
