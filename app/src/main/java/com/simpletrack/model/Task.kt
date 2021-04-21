@@ -14,7 +14,9 @@ class Task() {
         }
     }
 
-    // returns stopped time in milliseconds
+    /**
+     * returns stopped time in milliseconds
+     */
     fun stopTime(): Long {
         if (start == null || stop != null) {
             return -1
