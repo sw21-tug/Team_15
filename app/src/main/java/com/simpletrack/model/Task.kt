@@ -1,15 +1,15 @@
-import java.util.*
+import java.util.Date
 
 class Task() {
-    var start : Date? =  null
-            get
-            private set
-    var stop : Date? = null
-            get
-            private set
+    var start: Date? = null
+        get
+        private set
+    var stop: Date? = null
+        get
+        private set
 
     fun startTime() {
-        if(start == null) {
+        if (start == null) {
             start = Date()
         }
     }
@@ -24,12 +24,11 @@ class Task() {
         return stop!!.time - start!!.time
     }
 
-    fun isStopped() : Boolean {
+    fun isStopped(): Boolean {
         return start != null && stop != null
     }
 
-    fun running() : Boolean {
-        return start!= null && stop == null
+    fun running(): Boolean {
+        return start != null && stop == null
     }
-
 }

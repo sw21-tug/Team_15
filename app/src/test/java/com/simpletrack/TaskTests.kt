@@ -1,25 +1,23 @@
 package com.simpletrack
 
 import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import java.lang.Thread.sleep
 
 import Task
 
 class TaskTests {
-    
     @Test
-    fun timeCount_isCorrect(){
-        val sleepTime : Long = 1000
-        val epsilon : Long = 10
+    fun timeCount_isCorrect() {
+        val sleepTime: Long = 1000
+        val epsilon: Long = 10
         val task = Task()
 
         task.startTime()
         sleep(sleepTime)
         val retval = task.stopTime()
 
-        assert(retval>=sleepTime-epsilon && retval <= sleepTime+epsilon)
+        assert(retval >= sleepTime - epsilon && retval <= sleepTime + epsilon)
     }
 
     @Test
@@ -95,6 +93,4 @@ class TaskTests {
         val task = Task()
         assert(!task.isStopped())
     }
-
-
 }
