@@ -21,7 +21,7 @@ class TaskTests {
     }
 
     @Test
-    fun stop_before_start(){
+    fun stop_before_start() {
         val task = Task()
 
         val retval = task.stopTime()
