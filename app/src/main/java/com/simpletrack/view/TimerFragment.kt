@@ -1,6 +1,7 @@
 package com.simpletrack.view
 
 import Task
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,30 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.simpletrack.R
 import com.simpletrack.model.TimerViewModel
+import java.lang.Exception
 
 class TimerFragment : Fragment() {
 
     var task = Task()
+    var timerThread = Thread(
+        Runnable {
+            try {
+                while (true) {
+                    if (Thread.interrupted()) {
+                        return@Runnable
+                    }
+                    this@TimerFragment.requireActivity().runOnUiThread(
+                        java.lang.Runnable {
+                            requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
+                        }
+                    )
+                    Thread.sleep(100)
+                }
+            } catch (e: Exception) {
+                return@Runnable
+            }
+        }
+    )
 
     companion object {
         fun newInstance() = TimerFragment()
@@ -52,18 +73,15 @@ class TimerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
+    }
 
-        Thread(
-            Runnable {
-                while (true) {
-                    this@TimerFragment.requireActivity().runOnUiThread(
-                        java.lang.Runnable {
-                            requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
-                        }
-                    )
-                    Thread.sleep(100)
-                }
-            }
-        ).start()
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        timerThread.start()
+    }
+
+    override fun onDetach() {
+        timerThread.interrupt()
+        super.onDetach()
     }
 }
