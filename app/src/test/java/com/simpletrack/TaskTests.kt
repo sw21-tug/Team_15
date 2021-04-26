@@ -40,8 +40,8 @@ class TaskTests {
         assertEquals(firststart, task.start)
     }
 
-    // stop gets disabled when pressed this test makes no sense
-   /* @Test
+    /* stop gets disabled when pressed this test makes no sense
+    @Test
     fun stop_twice() {
         val task = Task()
 
