@@ -1,11 +1,11 @@
+package com.simpletrack.model
+
 import java.util.Date
 
-class Task() {
-    var start: Date? = null
-        get
+class Task(x: Date = Date(0), y: Date = Date(0)) {
+    var start: Date? = x
         private set
-    var stop: Date? = null
-        get
+    var stop: Date? = y
         private set
 
     fun startTime() {
