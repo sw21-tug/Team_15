@@ -73,6 +73,7 @@ class TimerFragment : Fragment() {
             task.stopTime()
             view.findViewById<Button>(R.id.startButton).isEnabled = true
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
+            timerThread.interrupt()
         }
     }
 
