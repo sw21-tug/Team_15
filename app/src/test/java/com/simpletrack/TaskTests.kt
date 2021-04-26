@@ -5,6 +5,7 @@ import org.junit.Assert.assertEquals
 import java.lang.Thread.sleep
 
 import Task
+import java.util.*
 
 class TaskTests {
     @Test
@@ -92,5 +93,17 @@ class TaskTests {
     fun isStoppedBeforeStart() {
         val task = Task()
         assert(!task.isStopped())
+    }
+
+    @Test
+    fun getTimeSuccess() {
+        val task = Task(Date(1000), Date(3000))
+        assert(task.getTime() == 2000L)
+    }
+
+    @Test
+    fun getTimeAsStringCorrect() {
+        val task = Task(Date(0), Date(8530000))
+        assert(task.getTimeAsString() == "02:22:10")
     }
 }

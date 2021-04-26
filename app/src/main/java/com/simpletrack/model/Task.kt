@@ -8,10 +8,23 @@ class Task() {
         get
         private set
 
+    constructor(start_: Date, stop_: Date) : this() {
+        start = start_
+        stop = stop_
+    }
+
     fun startTime() {
         if (start == null) {
             start = Date()
         }
+    }
+
+    fun getTime(): Long {
+        return -1
+    }
+
+    fun getTimeAsString(): String {
+        return ""
     }
 
     /**
