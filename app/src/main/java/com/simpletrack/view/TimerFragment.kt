@@ -43,8 +43,8 @@ class TimerFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
-            val time = task.stopTime()
-            view.findViewById<TextView>(R.id.timer).text = time.toString()
+            task.stopTime()
+            view.findViewById<TextView>(R.id.timer).text = (task.getDuration().toMillis() / 1000).toString()
             view.findViewById<Button>(R.id.startButton).isEnabled = true
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
         }

@@ -1,29 +1,30 @@
 package com.simpletrack.model
 
-import java.util.Date
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-class Task(x: Date = Date(0), y: Date = Date(0)) {
-    var start: Date? = x
+class Task(x: LocalDateTime = LocalDateTime.now(), y: LocalDateTime = LocalDateTime.now(), var name: String = "Taskname") {
+    var start: LocalDateTime? = x
         private set
-    var stop: Date? = y
+    var stop: LocalDateTime? = y
         private set
 
     fun startTime() {
         if (start == null) {
-            start = Date()
+            start = LocalDateTime.now()
         }
+    }
+
+    fun getDuration(): Duration {
+        return Duration.between(start, stop)
     }
 
     /**
      * returns stopped time in milliseconds
      */
-    fun stopTime(): Long {
-        if (start == null || stop != null) {
-            return -1
-        }
-        stop = Date()
-
-        return stop!!.time - start!!.time
+    fun stopTime() {
+        stop = LocalDateTime.now()
     }
 
     fun isStopped(): Boolean {
@@ -32,5 +33,10 @@ class Task(x: Date = Date(0), y: Date = Date(0)) {
 
     fun running(): Boolean {
         return start != null && stop == null
+    }
+
+    override fun toString(): String {
+        return "$name | ${start?.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))}\n" +
+            "${start?.format(DateTimeFormatter.ofPattern("HH:mm"))}-${stop?.format(DateTimeFormatter.ofPattern("HH:mm"))} | %.1f h".format(getDuration().toMinutes().toDouble() / (60.toDouble()))
     }
 }
