@@ -1,7 +1,6 @@
 package com.simpletrack.view
 
 import Task
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,25 +16,7 @@ import java.lang.Exception
 class TimerFragment : Fragment() {
 
     var task = Task()
-    var timerThread = Thread(
-        Runnable {
-            try {
-                while (true) {
-                    if (Thread.interrupted()) {
-                        return@Runnable
-                    }
-                    this@TimerFragment.requireActivity().runOnUiThread(
-                        java.lang.Runnable {
-                            requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
-                        }
-                    )
-                    Thread.sleep(100)
-                }
-            } catch (e: Exception) {
-                return@Runnable
-            }
-        }
-    )
+    var timerThread = Thread()
 
     companion object {
         fun newInstance() = TimerFragment()
@@ -57,6 +38,31 @@ class TimerFragment : Fragment() {
         view.findViewById<Button>(R.id.stopButton).isEnabled = false
 
         view.findViewById<Button>(R.id.startButton).setOnClickListener {
+            timerThread = Thread(
+                Runnable {
+                    try {
+                        while (true) {
+                            if (Thread.interrupted()) {
+                                return@Runnable
+                            }
+
+                            this@TimerFragment.requireActivity().runOnUiThread(
+                                java.lang.Runnable {
+                                    if (getView() != null) {
+                                        requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
+                                    }
+                                }
+                            )
+                            Thread.sleep(1000)
+                        }
+                    } catch (e: Exception) {
+                        return@Runnable
+                    }
+                }
+            )
+
+            timerThread.start()
+
             task = Task()
             task.startTime()
             view.findViewById<Button>(R.id.stopButton).isEnabled = true
@@ -73,11 +79,6 @@ class TimerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        timerThread.start()
     }
 
     override fun onDetach() {
