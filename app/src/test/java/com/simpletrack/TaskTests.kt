@@ -98,12 +98,30 @@ class TaskTests {
     @Test
     fun getTimeSuccess() {
         val task = Task(Date(1000), Date(3000))
-        assert(task.getTime() == 2000L)
+        assertEquals(2000L, task.getTime())
+    }
+
+    @Test
+    fun getTimeNotStarted() {
+        val task = Task()
+        assertEquals(0, task.getTime())
     }
 
     @Test
     fun getTimeAsStringCorrect() {
         val task = Task(Date(0), Date(8530000))
-        assert(task.getTimeAsString() == "02:22:10")
+        assertEquals("02:22:10", task.getTimeAsString())
+    }
+
+    @Test
+    fun getTimeAsStringThreeDigitHours() {
+        val task = Task(Date(0), Date(853000000))
+        assertEquals("236:56:40", task.getTimeAsString())
+    }
+
+    @Test
+    fun getTimeAsStringNotStarted() {
+        val task = Task()
+        assertEquals("00:00:00", task.getTimeAsString())
     }
 }

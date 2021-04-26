@@ -20,11 +20,19 @@ class Task() {
     }
 
     fun getTime(): Long {
-        return -1
+        return when {
+            running() -> Date().time - start!!.time
+            isStopped() -> stop!!.time - start!!.time
+            else -> 0
+        }
     }
 
     fun getTimeAsString(): String {
-        return ""
+        var mils = getTime()
+        val s = (mils / 1000).rem(60)
+        val m = (mils / (60 * 1000)).rem(60)
+        val h = mils / (60 * 60 * 1000)
+        return "%02d:%02d:%02d".format(h, m, s)
     }
 
     /**
