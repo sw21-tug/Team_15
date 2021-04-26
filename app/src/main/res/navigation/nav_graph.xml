@@ -10,7 +10,7 @@
     <fragment
         android:id="@+id/TimerFragment"
         android:name="com.simpletrack.view.TimerFragment"
-        tools:layout="@layout/fragment_timer">
+        tools:layout="@layout/timer_fragment">
 
     </fragment>
 </navigation>

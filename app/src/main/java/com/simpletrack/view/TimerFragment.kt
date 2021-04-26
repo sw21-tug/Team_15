@@ -28,7 +28,7 @@ class TimerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_timer, container, false)
+        return inflater.inflate(R.layout.timer_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +43,7 @@ class TimerFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
-            val time = task.stopTime()
-            view.findViewById<TextView>(R.id.timer).text = time.toString()
+            task.stopTime()
             view.findViewById<Button>(R.id.startButton).isEnabled = true
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
         }
@@ -53,6 +52,18 @@ class TimerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TimerViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        Thread(
+            Runnable {
+                while (true) {
+                    this@TimerFragment.requireActivity().runOnUiThread(
+                        java.lang.Runnable {
+                            requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
+                        }
+                    )
+                    Thread.sleep(100)
+                }
+            }
+        ).start()
     }
 }
