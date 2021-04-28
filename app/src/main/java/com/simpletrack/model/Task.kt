@@ -31,9 +31,11 @@ class Task(var name: String = "Taskname") {
     }
 
     fun getDuration(): Duration {
-        if (start == null || stop == null)
-            return Duration.ZERO
-        return Duration.between(start, stop)
+        return when {
+            running() -> Duration.between(start, LocalDateTime.now())
+            isStopped() -> Duration.between(start, stop)
+            else -> Duration.ZERO
+        }
     }
 
     /**
