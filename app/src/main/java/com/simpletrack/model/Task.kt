@@ -8,10 +8,31 @@ class Task(x: Date = Date(0), y: Date = Date(0)) {
     var stop: Date? = y
         private set
 
+    constructor(start_: Date, stop_: Date) : this() {
+        start = start_
+        stop = stop_
+    }
+
     fun startTime() {
         if (start == null) {
             start = Date()
         }
+    }
+
+    fun getTime(): Long {
+        return when {
+            running() -> Date().time - start!!.time
+            isStopped() -> stop!!.time - start!!.time
+            else -> 0
+        }
+    }
+
+    fun getTimeAsString(): String {
+        var mils = getTime()
+        val s = (mils / 1000).rem(60)
+        val m = (mils / (60 * 1000)).rem(60)
+        val h = mils / (60 * 60 * 1000)
+        return "%02d:%02d:%02d".format(h, m, s)
     }
 
     /**
