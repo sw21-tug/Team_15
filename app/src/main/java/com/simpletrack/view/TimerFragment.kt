@@ -67,7 +67,7 @@ class TimerFragment : Fragment() {
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
             MainActivity.currentTask!!.stopTime()
-            if(MainActivity.currentTask!!.isStopped()) {
+            if (MainActivity.currentTask!!.isStopped()) {
                 MainActivity.taskList.add(MainActivity.currentTask!!)
             }
             view.findViewById<Button>(R.id.startButton).isEnabled = true

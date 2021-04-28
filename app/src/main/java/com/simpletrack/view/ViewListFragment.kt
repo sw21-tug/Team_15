@@ -10,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.simpletrack.MainActivity
 import com.simpletrack.R
-import com.simpletrack.model.Task
 import com.simpletrack.model.ViewListViewModel
-import java.time.LocalDateTime
 
 class ViewListFragment : Fragment() {
 
