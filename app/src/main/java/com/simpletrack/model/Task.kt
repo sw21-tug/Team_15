@@ -1,50 +1,50 @@
-import java.util.Date
+package com.simpletrack.model
 
-class Task() {
-    var start: Date? = null
-        get
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
+class Task(var name: String = "Taskname") {
+    var start: LocalDateTime? = null
         private set
-    var stop: Date? = null
-        get
+    var stop: LocalDateTime? = null
         private set
 
-    constructor(start_: Date, stop_: Date) : this() {
+    constructor(start_: LocalDateTime, stop_: LocalDateTime, name_: String = "Taskname") : this() {
         start = start_
         stop = stop_
+        name = name_
     }
 
     fun startTime() {
         if (start == null) {
-            start = Date()
-        }
-    }
-
-    fun getTime(): Long {
-        return when {
-            running() -> Date().time - start!!.time
-            isStopped() -> stop!!.time - start!!.time
-            else -> 0
+            start = LocalDateTime.now()
         }
     }
 
     fun getTimeAsString(): String {
-        var mils = getTime()
+        val mils = getDuration().toMillis()
         val s = (mils / 1000).rem(60)
         val m = (mils / (60 * 1000)).rem(60)
         val h = mils / (60 * 60 * 1000)
         return "%02d:%02d:%02d".format(h, m, s)
     }
 
+    fun getDuration(): Duration {
+        return when {
+            running() -> Duration.between(start, LocalDateTime.now())
+            isStopped() -> Duration.between(start, stop)
+            else -> Duration.ZERO
+        }
+    }
+
     /**
      * returns stopped time in milliseconds
      */
-    fun stopTime(): Long {
-        if (start == null || stop != null) {
-            return -1
-        }
-        stop = Date()
-
-        return stop!!.time - start!!.time
+    fun stopTime() {
+        if (!running())
+            return
+        stop = LocalDateTime.now()
     }
 
     fun isStopped(): Boolean {
@@ -53,5 +53,10 @@ class Task() {
 
     fun running(): Boolean {
         return start != null && stop == null
+    }
+
+    override fun toString(): String {
+        return "$name | ${start?.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))}\n" +
+            "${start?.format(DateTimeFormatter.ofPattern("HH:mm"))}-${stop?.format(DateTimeFormatter.ofPattern("HH:mm"))} | %.1f h".format(getDuration().toMinutes().toDouble() / (60.toDouble()))
     }
 }
