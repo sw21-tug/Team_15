@@ -1,11 +1,10 @@
 package com.simpletrack
 
-import org.junit.Test
-import org.junit.Assert.assertEquals
-import java.lang.Thread.sleep
-
 import Task
-import java.util.*
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import java.lang.Thread.sleep
+import java.util.Date
 
 class TaskTests {
     @Test
