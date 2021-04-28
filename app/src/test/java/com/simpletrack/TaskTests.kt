@@ -1,32 +1,32 @@
 package com.simpletrack
 
-import Task
+import com.simpletrack.model.Task
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.lang.Thread.sleep
-import java.util.Date
+import java.time.LocalDateTime
 
 class TaskTests {
     @Test
     fun timeCount_isCorrect() {
         val sleepTime: Long = 1000
-        val epsilon: Long = 10
+        val epsilon: Long = 20
         val task = Task()
 
         task.startTime()
         sleep(sleepTime)
-        val retval = task.stopTime()
+        task.stopTime()
 
-        assert(retval >= sleepTime - epsilon && retval <= sleepTime + epsilon)
+        assert(task.getDuration().toMillis() >= sleepTime - epsilon && task.getDuration().toMillis() <= sleepTime + epsilon)
     }
 
     @Test
     fun stop_before_start() {
         val task = Task()
 
-        val retval = task.stopTime()
+        task.stopTime()
 
-        assertEquals(-1, retval)
+        assertEquals(null, task.stop)
     }
 
     @Test
@@ -95,27 +95,21 @@ class TaskTests {
     }
 
     @Test
-    fun getTimeSuccess() {
-        val task = Task(Date(1000), Date(3000))
-        assertEquals(2000L, task.getTime())
-    }
-
-    @Test
     fun getTimeNotStarted() {
         val task = Task()
-        assertEquals(0, task.getTime())
+        assertEquals(0, task.getDuration().toMillis())
     }
 
     @Test
     fun getTimeAsStringCorrect() {
-        val task = Task(Date(0), Date(8530000))
-        assertEquals("02:22:10", task.getTimeAsString())
+        val task = Task(LocalDateTime.of(2000, 10, 10, 20, 10, 10), LocalDateTime.of(2000, 10, 10, 21, 11, 20))
+        assertEquals("01:01:10", task.getTimeAsString())
     }
 
     @Test
     fun getTimeAsStringThreeDigitHours() {
-        val task = Task(Date(0), Date(853000000))
-        assertEquals("236:56:40", task.getTimeAsString())
+        val task = Task(LocalDateTime.of(2000, 10, 10, 20, 10, 10), LocalDateTime.of(2000, 10, 18, 20, 10, 10))
+        assertEquals("192:00:00", task.getTimeAsString())
     }
 
     @Test

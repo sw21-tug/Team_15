@@ -15,8 +15,8 @@ class ListAdapter(private val context: Activity, private val task_list: ArrayLis
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.list_layout, null, true)
 
-        val titleText = rowView.findViewById(R.id.title) as TextView
-        titleText.text = task_list[position].start.toString()
+        val titleText = rowView.findViewById(R.id.task) as TextView
+        titleText.text = task_list[position].toString()
         return rowView
     }
 }
