@@ -59,7 +59,7 @@ class TimerFragment : Fragment() {
 
             timerThread.start()
 
-            MainActivity.currentTask = Task()
+            MainActivity.currentTask = Task("Task ${MainActivity.taskList.size + 1}")
             MainActivity.currentTask!!.startTime()
             view.findViewById<Button>(R.id.stopButton).isEnabled = true
             view.findViewById<Button>(R.id.startButton).isEnabled = false
