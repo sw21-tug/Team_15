@@ -19,5 +19,5 @@ SimpleTrack - a time tracking solution for students and freelancer
 ## Features
 | Title |
 | ----  |
-| None so far |
+| Start/Stop time trackings |
 
