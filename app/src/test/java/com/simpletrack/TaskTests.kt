@@ -1,10 +1,10 @@
 package com.simpletrack
 
-import org.junit.Test
-import org.junit.Assert.assertEquals
-import java.lang.Thread.sleep
-
 import Task
+import org.junit.Assert.assertEquals
+import org.junit.Test
+import java.lang.Thread.sleep
+import java.util.Date
 
 class TaskTests {
     @Test
@@ -92,5 +92,35 @@ class TaskTests {
     fun isStoppedBeforeStart() {
         val task = Task()
         assert(!task.isStopped())
+    }
+
+    @Test
+    fun getTimeSuccess() {
+        val task = Task(Date(1000), Date(3000))
+        assertEquals(2000L, task.getTime())
+    }
+
+    @Test
+    fun getTimeNotStarted() {
+        val task = Task()
+        assertEquals(0, task.getTime())
+    }
+
+    @Test
+    fun getTimeAsStringCorrect() {
+        val task = Task(Date(0), Date(8530000))
+        assertEquals("02:22:10", task.getTimeAsString())
+    }
+
+    @Test
+    fun getTimeAsStringThreeDigitHours() {
+        val task = Task(Date(0), Date(853000000))
+        assertEquals("236:56:40", task.getTimeAsString())
+    }
+
+    @Test
+    fun getTimeAsStringNotStarted() {
+        val task = Task()
+        assertEquals("00:00:00", task.getTimeAsString())
     }
 }
