@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.simpletrack.MainActivity
 import com.simpletrack.R
 import com.simpletrack.model.Task
 import com.simpletrack.model.TimerViewModel
@@ -15,12 +16,7 @@ import java.lang.Exception
 
 class TimerFragment : Fragment() {
 
-    var task = Task()
     var timerThread = Thread()
-
-    companion object {
-        fun newInstance() = TimerFragment()
-    }
 
     private lateinit var viewModel: TimerViewModel
 
@@ -49,7 +45,7 @@ class TimerFragment : Fragment() {
                             this@TimerFragment.requireActivity().runOnUiThread(
                                 java.lang.Runnable {
                                     if (getView() != null) {
-                                        requireView().findViewById<TextView>(R.id.timer).text = task.getTimeAsString()
+                                        requireView().findViewById<TextView>(R.id.timer).text = MainActivity.currentTask!!.getTimeAsString()
                                     }
                                 }
                             )
@@ -63,14 +59,17 @@ class TimerFragment : Fragment() {
 
             timerThread.start()
 
-            task = Task()
-            task.startTime()
+            MainActivity.currentTask = Task("Task ${MainActivity.taskList.size + 1}")
+            MainActivity.currentTask!!.startTime()
             view.findViewById<Button>(R.id.stopButton).isEnabled = true
             view.findViewById<Button>(R.id.startButton).isEnabled = false
         }
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
-            task.stopTime()
+            MainActivity.currentTask!!.stopTime()
+            if (MainActivity.currentTask!!.isStopped()) {
+                MainActivity.taskList.add(MainActivity.currentTask!!)
+            }
             view.findViewById<Button>(R.id.startButton).isEnabled = true
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
             timerThread.interrupt()

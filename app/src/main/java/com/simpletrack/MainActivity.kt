@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.simpletrack.view.HomeFragment
+import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
@@ -18,7 +18,7 @@ import java.util.Locale
 class MainActivity : AppCompatActivity() {
 
     enum class Fragments {
-        HOME, TIMER, LIST, SETTINGS
+        TIMER, LIST, SETTINGS
     }
 
     // The key for saving and retrieving isActivityRecreated field.
@@ -27,18 +27,22 @@ class MainActivity : AppCompatActivity() {
     /* true if this activity is recreated.  */
     private var isActivityRecreated = false
 
-    private var currentFragment: Fragments = Fragments.HOME
+    private var currentFragment: Fragments = Fragments.TIMER
+
+    companion object {
+        val taskList = ArrayList<Task>()
+        var currentTask: Task? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val homeFragment = HomeFragment()
         val timerFragment = TimerFragment()
         val viewListFragment = ViewListFragment()
         val settingsFragment = SettingsFragment()
 
-        var loadFragment = Fragments.HOME
+        var loadFragment = Fragments.TIMER
 
         if (savedInstanceState != null) {
             isActivityRecreated = savedInstanceState.getBoolean(KEY_IS_ACTIVITY_RECREATED)
@@ -53,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         when (loadFragment) {
-            Fragments.HOME -> setCurrentFragment(homeFragment)
             Fragments.TIMER -> setCurrentFragment(timerFragment)
             Fragments.LIST -> setCurrentFragment(viewListFragment)
             Fragments.SETTINGS -> setCurrentFragment(settingsFragment)
@@ -63,10 +66,6 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> {
-                    setCurrentFragment(homeFragment)
-                    currentFragment = Fragments.HOME
-                }
                 R.id.navigation_timer -> {
                     setCurrentFragment(timerFragment)
                     currentFragment = Fragments.TIMER
