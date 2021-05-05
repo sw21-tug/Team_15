@@ -1,6 +1,9 @@
 package com.simpletrack
 
 import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.simpletrack.model.Task
@@ -8,9 +11,6 @@ import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.time.LocalDateTime
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.withId
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -55,18 +55,18 @@ class StorageTest {
         assertEquals(taskList.size, loadedData.size)
     }
 
-
     @Test
-    fun TestStorageIntegration() {
+    fun testStorageIntegration() {
         val scenario = ActivityScenario.launch(MainActivity::class.java)
         val storage = MainActivity.storage
+        val inputSize = storage.loadData().size
         onView(withId(R.id.startButton)).perform(click())
         onView(withId(R.id.stopButton)).perform(click())
 
+        Thread.sleep(1000)
         val loadedData = storage.loadData()
 
         scenario.close()
-        assertEquals(1, loadedData.size)
-
+        assertEquals(1, loadedData.size - inputSize)
     }
 }

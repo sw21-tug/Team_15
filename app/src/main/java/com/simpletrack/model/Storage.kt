@@ -1,7 +1,11 @@
 package com.simpletrack.model
 
 import com.simpletrack.MainActivity
-import java.io.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.ObjectInputStream
+import java.io.ObjectOutputStream
 import java.lang.Exception
 
 class Storage(val activity: MainActivity) {
@@ -11,28 +15,28 @@ class Storage(val activity: MainActivity) {
     }
 
     fun storeData(taskList: ArrayList<Task>): Boolean {
-        try {
+        return try {
             val directory: File = activity.filesDir
-            val os = FileOutputStream(directory.path + listFileName)
+            val os = FileOutputStream(directory.path + listFileName, false)
             val oos = ObjectOutputStream(os)
             oos.writeObject(taskList)
             oos.close()
+            true
         } catch (e: Exception) {
             // TODO: handle different exceptions
-            return false
+            false
         }
-        return true
     }
 
     fun loadData(): ArrayList<Task> {
-        try {
+        return try {
             val directory: File = activity.filesDir
             val os = FileInputStream(directory.path + listFileName)
             val oos = ObjectInputStream(os)
-            return oos.readObject() as ArrayList<Task>
+            oos.readObject() as ArrayList<Task>
         } catch (e: Exception) {
             // TODO: handle different exceptions
-            return ArrayList()
+            ArrayList()
         }
     }
 }

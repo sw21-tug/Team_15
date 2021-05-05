@@ -13,7 +13,7 @@ import com.simpletrack.view.ViewListFragment
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        val taskList = ArrayList<Task>()
+        var taskList = ArrayList<Task>()
         var currentTask: Task? = null
         lateinit var storage: Storage
     }
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         storage = Storage(this)
+        taskList = storage.loadData()
         val timerFragment = TimerFragment()
         val viewListFragment = ViewListFragment()
         val settingsFragment = SettingsFragment()
