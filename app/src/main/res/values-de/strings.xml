@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleTrack</string>
+    <string name="action_settings">aktions einstellungen</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">label erstes fragment</string>
+    <string name="second_fragment_label">label zweites fragment</string>
+    <string name="next">nächstes</string>
+    <string name="previous">vorheriges</string>
+
+    <string name="hello_first_fragment">hallo erstes fragment</string>
+    <string name="hello_second_fragment">hallo zweites fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">hallo leeres fragment</string>
+    <string name="start">Start</string>
+    <string name="stop">Stopp</string>
+    <!--navbar-->
+    <string name="home">Startseite</string>
+    <string name="timer">Stoppuhr</string>
+    <string name="list">Liste</string>
+    <string name="settings">Einstellungen</string>
+    <string name="lang_selection">Sprache</string>
+    <string name="time">00:00:00</string>
+
+</resources>

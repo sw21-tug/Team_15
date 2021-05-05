@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleTrack</string>
+    <string name="action_settings">Настройки</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Первый фрагмент</string>
+    <string name="second_fragment_label">Второй фрагмент</string>
+    <string name="next">Следующий</string>
+    <string name="previous">Предыдущий</string>
+
+    <string name="hello_first_fragment">Привет первый фрагмент</string>
+    <string name="hello_second_fragment">Привет второй фрагмент. Аргумент:% 1 $ s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="start">Начало</string>
+    <string name="stop">останавливаться</string>
+    <!--navbar-->
+    <string name="home">дом</string>
+    <string name="timer">таймер</string>
+    <string name="list">список</string>
+    <string name="settings">Настройки</string>
+    <string name="lang_selection">выберите язык</string>
+    <string name="time">00:00:00</string>
+
+</resources>
