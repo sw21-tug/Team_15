@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.simpletrack.model.Storage
 import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
@@ -30,14 +31,16 @@ class MainActivity : AppCompatActivity() {
     private var currentFragment: Fragments = Fragments.TIMER
 
     companion object {
-        val taskList = ArrayList<Task>()
+        var taskList = ArrayList<Task>()
         var currentTask: Task? = null
+        lateinit var storage: Storage
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        storage = Storage(this)
+        taskList = storage.loadData()
         val timerFragment = TimerFragment()
         val viewListFragment = ViewListFragment()
         val settingsFragment = SettingsFragment()
