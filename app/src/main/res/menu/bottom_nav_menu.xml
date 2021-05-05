@@ -2,18 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:title="Home"/>
+        android:title="@string/home"/>
 
     <item
         android:id="@+id/navigation_timer"
-        android:title="Timer"/>
+        android:title="@string/timer"/>
 
     <item
         android:id="@+id/navigation_viewList"
-        android:title="List"/>
+        android:title="@string/list"/>
 
     <item
         android:id="@+id/navigation_settings"
-        android:title="Settings"/>
+        android:title="@string/settings"/>
+
+    <item
+        android:id="@+id/language_selection"
+        android:title="@string/lang_selection"/>
 
 </menu>

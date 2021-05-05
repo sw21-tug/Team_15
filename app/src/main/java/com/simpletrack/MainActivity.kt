@@ -1,10 +1,11 @@
 package com.simpletrack
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +17,18 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
+    enum class Fragments {
+        HOME, TIMER, LIST, SETTINGS
+    }
+
+    // The key for saving and retrieving isActivityRecreated field.
+    private val KEY_IS_ACTIVITY_RECREATED = "KEY_IS_ACTIVITY_RECREATED"
+
+    /* true if this activity is recreated.  */
+    private var isActivityRecreated = false
+
+    private var currentFragment: Fragments = Fragments.HOME
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,19 +38,107 @@ class MainActivity : AppCompatActivity() {
         val viewListFragment = ViewListFragment()
         val settingsFragment = SettingsFragment()
 
-        setCurrentFragment(homeFragment)
+        var loadFragment = Fragments.HOME
+
+        if (savedInstanceState != null) {
+            isActivityRecreated = savedInstanceState.getBoolean(KEY_IS_ACTIVITY_RECREATED)
+            if (isActivityRecreated) {
+                // This activity has been recreated.
+                // Reset the flag
+                isActivityRecreated = false
+
+                // Write your code when this activity recreated.
+                loadFragment = Fragments.values()[savedInstanceState.getInt("PREV_FRAGMENT")]
+            }
+        }
+
+        when (loadFragment) {
+            Fragments.HOME -> setCurrentFragment(homeFragment)
+            Fragments.TIMER -> setCurrentFragment(timerFragment)
+            Fragments.LIST -> setCurrentFragment(viewListFragment)
+            Fragments.SETTINGS -> setCurrentFragment(settingsFragment)
+        }
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.navigation_home -> setCurrentFragment(homeFragment)
-                R.id.navigation_timer -> setCurrentFragment(timerFragment)
-                R.id.navigation_viewList -> setCurrentFragment(viewListFragment)
-                R.id.navigation_settings -> setCurrentFragment(settingsFragment)
+                R.id.navigation_home -> {
+                    setCurrentFragment(homeFragment)
+                    currentFragment = Fragments.HOME
+                }
+                R.id.navigation_timer -> {
+                    setCurrentFragment(timerFragment)
+                    currentFragment = Fragments.TIMER
+                }
+                R.id.navigation_viewList -> {
+                    setCurrentFragment(viewListFragment)
+                    currentFragment = Fragments.LIST
+                }
+                R.id.navigation_settings -> {
+                    setCurrentFragment(settingsFragment)
+                    currentFragment = Fragments.SETTINGS
+                }
+                R.id.language_selection -> changeLanguage()
             }
             true
         }
+
+        loadLocale()
+    }
+
+    private fun changeLanguage() {
+        loadLocale()
+        val languages = arrayOf("German", "Russian", "English")
+
+        val langSelectorBuilder = AlertDialog.Builder(this@MainActivity)
+        langSelectorBuilder.setTitle("Select Language: ")
+        langSelectorBuilder.setSingleChoiceItems(languages, -1) { dialog, selection ->
+            when (selection) {
+                0 -> {
+                    setLocale("de")
+                }
+                1 -> {
+                    setLocale("ru")
+                }
+                2 -> {
+                    setLocale("en")
+                }
+            }
+            recreateActivity()
+            dialog.dismiss()
+        }
+        langSelectorBuilder.create().show()
+    }
+
+    // Call this method when you want to recreate this activity.
+    private fun recreateActivity() {
+        isActivityRecreated = true
+        recreate()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_ACTIVITY_RECREATED, isActivityRecreated)
+        outState.putInt("PREV_FRAGMENT", currentFragment.ordinal)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun setLocale(localeToSet: String) {
+        val localeListToSet = LocaleList(Locale(localeToSet))
+        LocaleList.setDefault(localeListToSet)
+        resources.configuration.setLocales(localeListToSet)
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        sharedPref.putString("locale_to_set", localeToSet)
+        sharedPref.apply()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun loadLocale() {
+        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        val localeToSet: String = sharedPref.getString("locale_to_set", "")!!
+        setLocale(localeToSet)
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
@@ -45,45 +146,4 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.flFragment, fragment)
             commit()
         }
-
-    fun setLanguage(context: Context, language: String): ContextWrapper {
-        var mContext = context
-
-        val localeLang = language.split("_".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val locale: Locale
-        if (localeLang.size > 1)
-            locale = Locale(localeLang[0], localeLang[1])
-        else
-            locale = Locale(localeLang[0])
-
-        val res = mContext.resources
-        val configuration = res.configuration
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val localeList = LocaleList(locale)
-            LocaleList.setDefault(localeList)
-            configuration.setLocales(localeList)
-            mContext = mContext.createConfigurationContext(configuration)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            configuration.setLocale(locale)
-            mContext = mContext.createConfigurationContext(configuration)
-        } else {
-            configuration.locale = locale
-            res.updateConfiguration(configuration, res.getDisplayMetrics())
-        }
-
-        return ContextWrapper(mContext)
-    }
-
-    //    For Language Changing
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(
-            newBase?.let {
-                setLanguage(
-                    it,
-                    "rus"
-                )
-            }
-        )
-    }
 }
