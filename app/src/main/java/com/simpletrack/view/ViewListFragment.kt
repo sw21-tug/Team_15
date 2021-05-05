@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.simpletrack.MainActivity
 import com.simpletrack.R
-import com.simpletrack.model.Task
 import com.simpletrack.model.ViewListViewModel
-import java.time.LocalDateTime
 
 class ViewListFragment : Fragment() {
 
@@ -22,14 +21,6 @@ class ViewListFragment : Fragment() {
     private lateinit var viewModel: ViewListViewModel
 
     private lateinit var listView: ListView
-
-    private var test_list = arrayListOf(
-        Task(LocalDateTime.of(2021, 3, 3, 10, 10, 45), LocalDateTime.of(2021, 3, 3, 12, 34, 50), "Eating"),
-        Task(LocalDateTime.of(2020, 3, 3, 10, 10, 45), LocalDateTime.of(2020, 3, 7, 12, 34, 50), "PARTYING"),
-        Task(LocalDateTime.of(2021, 1, 13, 15, 16, 0), LocalDateTime.of(2021, 1, 20, 13, 45, 50), "Studying"),
-        Task(LocalDateTime.of(2020, 12, 3, 0, 0, 45), LocalDateTime.of(2020, 12, 30, 7, 34, 50), "Programming"),
-        Task(LocalDateTime.of(2020, 3, 3, 10, 10, 45), LocalDateTime.of(2020, 5, 7, 12, 34, 50), "LOCKDOWNING")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +34,8 @@ class ViewListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         listView = view.findViewById(R.id.listView)
 
-        val list_adap = ListAdapter(this.activity as Activity, test_list)
-        listView.adapter = list_adap
+        val listAdapter = ListAdapter(this.activity as Activity, MainActivity.taskList)
+        listView.adapter = listAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
