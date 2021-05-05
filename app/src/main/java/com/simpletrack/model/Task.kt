@@ -1,10 +1,11 @@
 package com.simpletrack.model
 
+import java.io.Serializable
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class Task(var name: String = "Taskname") {
+class Task(var name: String = "Taskname") : Serializable {
     var start: LocalDateTime? = null
         private set
     var stop: LocalDateTime? = null

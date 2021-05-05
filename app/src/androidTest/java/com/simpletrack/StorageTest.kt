@@ -1,14 +1,20 @@
 package com.simpletrack
 
-import com.simpletrack.model.Storage
+import androidx.test.core.app.ActivityScenario
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.filters.LargeTest
 import com.simpletrack.model.Task
 import org.junit.Test
+import org.junit.runner.RunWith
 import java.time.LocalDateTime
 
+@RunWith(AndroidJUnit4::class)
+@LargeTest
 class StorageTest {
     @Test
     fun storeData() {
-        val storage = Storage()
+        ActivityScenario.launch(MainActivity::class.java)
+        val storage = MainActivity.storage
         val success = storage.storeData(
             arrayListOf(
                 Task(LocalDateTime.of(2021, 3, 3, 10, 10, 45), LocalDateTime.of(2021, 3, 3, 12, 34, 50), "Eating"),
@@ -23,7 +29,8 @@ class StorageTest {
 
     @Test
     fun loadData() {
-        val storage = Storage()
+        ActivityScenario.launch(MainActivity::class.java)
+        val storage = MainActivity.storage
 
         val taskList = arrayListOf(
             Task(LocalDateTime.of(2021, 3, 3, 10, 10, 45), LocalDateTime.of(2021, 3, 3, 12, 34, 50), "Eating"),
