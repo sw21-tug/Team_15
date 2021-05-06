@@ -22,6 +22,7 @@ SimpleTrack - a time tracking solution for students and freelancer
 | Start/Stop time trackings |
 | time tracking clock |
 | time tracking list view |
+| russian language support |
 | persistent data |
 
 
