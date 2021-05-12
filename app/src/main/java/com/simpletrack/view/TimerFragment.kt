@@ -35,6 +35,23 @@ class TimerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.stopButton).isEnabled = false
 
+        val languages = resources.getStringArray(R.array.Languages)
+
+        val spinner = view.findViewById<Spinner>(R.id.taskDropdown)
+        if (spinner != null) {
+            val adapter = context?.let {
+                ArrayAdapter(
+                        it,
+                        android.R.layout.simple_spinner_item, languages
+                )
+            }
+            spinner.adapter = adapter
+
+            if (adapter != null) {
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+        }
+
         view.findViewById<Button>(R.id.startButton).setOnClickListener {
             timerThread = Thread(
                 Runnable {
@@ -69,6 +86,7 @@ class TimerFragment : Fragment() {
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
             MainActivity.currentTask!!.stopTime()
+            MainActivity.currentTask!!.name = spinner.selectedItem.toString()
             if (MainActivity.currentTask!!.isStopped()) {
                 MainActivity.taskList.add(MainActivity.currentTask!!)
                 MainActivity.storage.storeData(MainActivity.taskList)
@@ -76,23 +94,6 @@ class TimerFragment : Fragment() {
             view.findViewById<Button>(R.id.startButton).isEnabled = true
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
             timerThread.interrupt()
-        }
-
-        val languages = resources.getStringArray(R.array.Languages)
-
-        val spinner = view.findViewById<Spinner>(R.id.taskDropdown)
-        if (spinner != null) {
-            val adapter = context?.let {
-                ArrayAdapter(
-                    it,
-                    android.R.layout.simple_spinner_item, languages
-                )
-            }
-            spinner.adapter = adapter
-
-            if (adapter != null) {
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            }
         }
     }
 
