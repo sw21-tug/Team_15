@@ -45,10 +45,14 @@ class ViewListFragment : Fragment() {
             val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(this.context)
             builder.setTitle("Title")
 
+
             val input = EditText(this.context)
             input.setHint("Enter Text")
             input.inputType = InputType.TYPE_CLASS_TEXT
+            input.setText(MainActivity.taskList[position].name)
+            input.setSelectAllOnFocus(true);
             builder.setView(input)
+
 
             var m_Text: String = ""
             builder.setPositiveButton(
