@@ -22,6 +22,11 @@
     <string name="lang_selection">Sprache</string>
     <string name="time">00:00:00</string>
 
+    <string name="Title">Titel</string>
+    <string name="EnterText">Text eingeben</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Abbrechen</string>
+
     <string-array name="Languages">
         <item>Arbeit</item>
         <item>Konferenz</item>

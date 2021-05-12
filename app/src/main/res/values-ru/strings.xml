@@ -22,6 +22,11 @@
     <string name="lang_selection">выберите язык</string>
     <string name="time">00:00:00</string>
 
+    <string name="Title">Заголовок</string>
+    <string name="EnterText">Введите текст</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Отмена</string>
+
     <string-array name="Languages">
         <item>WorkРабота</item>
         <item>Встреча</item>
