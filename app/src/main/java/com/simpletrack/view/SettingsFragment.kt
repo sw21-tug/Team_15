@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.simpletrack.MainActivity
 import com.simpletrack.R
 import com.simpletrack.model.SettingsViewModel
 
@@ -22,5 +24,12 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.settings_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Button>(R.id.exportButton).setOnClickListener {
+            MainActivity.exportManager.exportToCSV(MainActivity.taskList)
+        }
     }
 }

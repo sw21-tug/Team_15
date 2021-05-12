@@ -9,12 +9,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.simpletrack.model.ExportManager
 import com.simpletrack.model.Storage
 import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
 import java.util.Locale
+import kotlin.math.expm1
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,12 +36,14 @@ class MainActivity : AppCompatActivity() {
         var taskList = ArrayList<Task>()
         var currentTask: Task? = null
         lateinit var storage: Storage
+        lateinit var exportManager: ExportManager
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         storage = Storage(this)
+        exportManager = ExportManager(this)
         taskList = storage.loadData()
         val timerFragment = TimerFragment()
         val viewListFragment = ViewListFragment()
