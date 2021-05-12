@@ -45,18 +45,18 @@
         android:id="@+id/taskDropdown"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
+        android:background="@drawable/layout_corners_shape"
         android:backgroundTint="#6200EE"
         android:foregroundTint="#FFFFFF"
         android:foregroundTintMode="src_over"
         android:spinnerMode="dropdown"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/stopButton"
         app:layout_constraintStart_toStartOf="@+id/startButton"
         app:layout_constraintTop_toBottomOf="@+id/timer"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.45"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
