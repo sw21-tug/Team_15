@@ -22,4 +22,12 @@
     <string name="lang_selection">выберите язык</string>
     <string name="time">00:00:00</string>
 
+    <string-array name="Languages">
+        <item>WorkРабота</item>
+        <item>Встреча</item>
+        <item>Перерыв</item>
+        <item>Спорт</item>
+        <item>Вечеринка</item>
+    </string-array>
+
 </resources>

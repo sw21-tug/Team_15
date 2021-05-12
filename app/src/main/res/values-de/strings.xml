@@ -22,4 +22,12 @@
     <string name="lang_selection">Sprache</string>
     <string name="time">00:00:00</string>
 
+    <string-array name="Languages">
+        <item>Arbeit</item>
+        <item>Konferenz</item>
+        <item>Pause</item>
+        <item>Sport</item>
+        <item>Feiern</item>
+    </string-array>
+
 </resources>
