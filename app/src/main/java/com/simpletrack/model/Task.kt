@@ -60,4 +60,11 @@ class Task(var name: String = "Taskname") : Serializable {
         return "$name | ${start?.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))}\n" +
             "${start?.format(DateTimeFormatter.ofPattern("HH:mm"))}-${stop?.format(DateTimeFormatter.ofPattern("HH:mm"))} | %.1f h".format(getDuration().toMinutes().toDouble() / (60.toDouble()))
     }
+
+    /**
+     * Name; Startdate; EndDate; Duration
+     */
+    fun toCsv(): String {
+        return ""
+    }
 }
