@@ -43,8 +43,8 @@
 
     <Spinner
         android:id="@+id/taskDropdown"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
         android:background="@drawable/layout_corners_shape"
         android:backgroundTint="#6200EE"
         android:foregroundTint="#FFFFFF"

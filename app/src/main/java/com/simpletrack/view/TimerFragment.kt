@@ -41,8 +41,8 @@ class TimerFragment : Fragment() {
         if (spinner != null) {
             val adapter = context?.let {
                 ArrayAdapter(
-                        it,
-                        android.R.layout.simple_spinner_item, languages
+                    it,
+                    android.R.layout.simple_spinner_item, languages
                 )
             }
             spinner.adapter = adapter
