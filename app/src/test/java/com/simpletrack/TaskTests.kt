@@ -124,6 +124,12 @@ class TaskTests {
         val stop = LocalDateTime.of(2021, 5, 12, 9, 46, 0)
         val task = Task(start, stop, "TestTask")
         // Name; Startdate; EndDate; Duration
-        assertEquals("TestTask; 2021-05-12T08:46; 2021-05-12T09:46; 01:00:00", task.toCsv())
+        assertEquals("TestTask; 2021-05-12T08:46; 2021-05-12T09:46; 01:00:00\n", task.toCsv())
+    }
+
+    @Test
+    fun testToCsvEdgeCase() {
+        val task = Task()
+        assertEquals("", task.toCsv())
     }
 }
