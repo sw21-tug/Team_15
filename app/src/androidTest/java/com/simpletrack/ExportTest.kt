@@ -1,14 +1,10 @@
 package com.simpletrack
 
-import android.os.Environment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.simpletrack.model.Task
-import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.io.File
-import java.lang.Exception
 import java.time.LocalDateTime
 
 @RunWith(AndroidJUnit4::class)
@@ -26,12 +22,9 @@ class ExportTest {
         )
         try {
             exportManager.exportToCSV(taskList)
-            val file = File("${Environment.DIRECTORY_DOCUMENTS}/simpleTrack.csv")
-            val resultList = exportManager.importCSV(file)
-            assertEquals(taskList.size, resultList.size)
         } catch (e: Exception) {
             assert(false)
         }
-        scenario.close();
+        scenario.close()
     }
 }

@@ -17,6 +17,10 @@ class Task(var name: String = "Taskname") : Serializable {
         name = name_
     }
 
+    fun setNewName(name_: String) {
+        name = name_
+    }
+
     fun startTime() {
         if (start == null) {
             start = LocalDateTime.now()

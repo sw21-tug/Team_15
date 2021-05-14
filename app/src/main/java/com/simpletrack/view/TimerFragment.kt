@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +34,23 @@ class TimerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.stopButton).isEnabled = false
+
+        val languages = resources.getStringArray(R.array.Languages)
+
+        val spinner = view.findViewById<Spinner>(R.id.taskDropdown)
+        if (spinner != null) {
+            val adapter = context?.let {
+                ArrayAdapter(
+                    it,
+                    android.R.layout.simple_spinner_item, languages
+                )
+            }
+            spinner.adapter = adapter
+
+            if (adapter != null) {
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+        }
 
         view.findViewById<Button>(R.id.startButton).setOnClickListener {
             timerThread = Thread(
@@ -67,6 +86,7 @@ class TimerFragment : Fragment() {
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
             MainActivity.currentTask!!.stopTime()
+            MainActivity.currentTask!!.name = spinner.selectedItem.toString()
             if (MainActivity.currentTask!!.isStopped()) {
                 MainActivity.taskList.add(MainActivity.currentTask!!)
                 MainActivity.storage.storeData(MainActivity.taskList)
