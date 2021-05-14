@@ -68,7 +68,7 @@ class TimerFragment : Fragment() {
                                     }
                                 }
                             )
-                            Thread.sleep(1000)
+                            Thread.sleep(100)
                         }
                     } catch (e: Exception) {
                         return@Runnable
