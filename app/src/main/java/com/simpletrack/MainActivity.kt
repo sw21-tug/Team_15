@@ -16,7 +16,6 @@ import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
 import java.util.Locale
-import kotlin.math.expm1
 
 class MainActivity : AppCompatActivity() {
 

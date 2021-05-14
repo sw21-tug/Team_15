@@ -69,7 +69,7 @@ class Task(var name: String = "Taskname") : Serializable {
      * Name; Startdate; EndDate; Duration
      */
     fun toCsv(): String {
-        if(isStopped())
+        if (isStopped())
             return "$name; ${start?.toString()}; ${stop?.toString()}; ${getTimeAsString()}\n"
         return ""
     }
