@@ -39,4 +39,8 @@ class Storage(val activity: MainActivity) {
             ArrayList()
         }
     }
+
+    fun deleteData() {
+        throw NotImplementedError()
+    }
 }
