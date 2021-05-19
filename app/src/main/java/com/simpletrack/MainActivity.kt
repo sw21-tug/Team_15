@@ -152,7 +152,22 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
+    fun openResetDataDialogue() {
+        val resetBuilder = AlertDialog.Builder(this@MainActivity)
+        resetBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+            resetData()
+            dialog.dismiss()
+        }
+        resetBuilder.setNegativeButton(R.string.no) { dialog, _ -> dialog.dismiss() }
+        resetBuilder.setTitle(R.string.resetConfirmation)
+        resetBuilder.create().show()
+    }
+
     fun resetData() {
-        throw NotImplementedError()
+        storage.deleteData()
+        taskList.clear()
+        Locale.setDefault(Locale.ENGLISH)
+        setLocale("en")
+        recreateActivity()
     }
 }

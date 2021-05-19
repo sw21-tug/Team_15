@@ -52,7 +52,6 @@ class ResetDataTest {
 
         scenario.onActivity { activity ->
             Locale.setDefault(Locale.GERMAN)
-
             MainActivity.taskList = taskList
             activity.resetData()
 
