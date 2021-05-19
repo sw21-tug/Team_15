@@ -21,6 +21,7 @@
     <string name="settings">Настройки</string>
     <string name="lang_selection">выберите язык</string>
     <string name="time">-- : -- : --</string>
+    <string name="export">экспорт</string>
 
     <string name="Title">Заголовок</string>
     <string name="EnterText">Введите текст</string>
@@ -34,5 +35,4 @@
         <item>Спорт</item>
         <item>Вечеринка</item>
     </string-array>
-
 </resources>
