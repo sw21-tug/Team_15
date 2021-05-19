@@ -20,7 +20,7 @@
     <string name="list">список</string>
     <string name="settings">Настройки</string>
     <string name="lang_selection">выберите язык</string>
-    <string name="time">00:00:00</string>
+    <string name="time">-- : -- : --</string>
     <string name="export">экспорт</string>
 
     <string name="Title">Заголовок</string>
