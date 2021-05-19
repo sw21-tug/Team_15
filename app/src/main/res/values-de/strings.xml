@@ -21,6 +21,7 @@
     <string name="settings">Einstellungen</string>
     <string name="lang_selection">Sprache</string>
     <string name="time">00:00:00</string>
+    <string name="export">Exportieren</string>
 
     <string name="Title">Titel</string>
     <string name="EnterText">Text eingeben</string>
@@ -34,5 +35,4 @@
         <item>Sport</item>
         <item>Feiern</item>
     </string-array>
-
 </resources>
