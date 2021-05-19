@@ -41,6 +41,8 @@ class Storage(val activity: MainActivity) {
     }
 
     fun deleteData() {
-        throw NotImplementedError()
+        val localStorage = File(activity.filesDir.path + listFileName)
+        if (localStorage.exists())
+            localStorage.delete()
     }
 }
