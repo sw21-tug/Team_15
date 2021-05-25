@@ -29,7 +29,7 @@
     <string name="Cancel">Отмена</string>
 
     <string-array name="Languages">
-        <item>WorkРабота</item>
+        <item>Работа</item>
         <item>Встреча</item>
         <item>Перерыв</item>
         <item>Спорт</item>
