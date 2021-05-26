@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.simpletrack.MainActivity
@@ -41,19 +43,33 @@ class TimerFragment : Fragment() {
             }
         }
 
-        val languages = resources.getStringArray(R.array.Languages)
+        val taskTypes = resources.getStringArray(R.array.TaskTypes)
 
         spinner = view.findViewById<Spinner>(R.id.taskDropdown)
         val adapter = context?.let {
             ArrayAdapter(
                 it,
-                android.R.layout.simple_spinner_item, languages
+                android.R.layout.simple_spinner_item, taskTypes
             )
         }
         spinner.adapter = adapter
 
         if (adapter != null) {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                if (selectedItem == taskTypes[taskTypes.size - 1]) {
+                    requireView().findViewById<EditText>(R.id.customTasknameInput).visibility = View.VISIBLE
+                } else {
+                    requireView().findViewById<EditText>(R.id.customTasknameInput).visibility = View.INVISIBLE
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
         }
 
         view.findViewById<Button>(R.id.startButton).setOnClickListener {
