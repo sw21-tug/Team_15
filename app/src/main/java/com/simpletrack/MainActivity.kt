@@ -1,6 +1,7 @@
 package com.simpletrack
 
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -11,6 +12,8 @@ import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -104,5 +107,24 @@ class MainActivity : AppCompatActivity() {
     fun recreateActivity() {
         isActivityRecreated = true
         recreate()
+    }
+
+    fun openResetDataDialogue() {
+        val resetBuilder = AlertDialog.Builder(this@MainActivity)
+        resetBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+            resetData()
+            dialog.dismiss()
+        }
+        resetBuilder.setNegativeButton(R.string.no) { dialog, _ -> dialog.dismiss() }
+        resetBuilder.setTitle(R.string.resetConfirmation)
+        resetBuilder.create().show()
+    }
+
+    fun resetData() {
+        storage.deleteData()
+        taskList.clear()
+        Locale.setDefault(Locale.ENGLISH)
+        setLocale("en")
+        recreateActivity()
     }
 }

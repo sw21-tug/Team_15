@@ -34,5 +34,10 @@ class SettingsFragment : Fragment() {
         view.findViewById<Button>(R.id.langButton).setOnClickListener {
             MainActivity.languageManager.changeLanguage()
         }
+
+        view.findViewById<Button>(R.id.resetButton).setOnClickListener {
+            val act = activity as MainActivity
+            act.openResetDataDialogue()
+        }
     }
 }
