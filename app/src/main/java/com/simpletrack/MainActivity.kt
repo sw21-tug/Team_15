@@ -1,21 +1,19 @@
 package com.simpletrack
 
-import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.os.LocaleList
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.simpletrack.model.ExportManager
+import com.simpletrack.model.LanguageManager
 import com.simpletrack.model.Storage
 import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
 import java.util.Locale
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         var currentTask: Task? = null
         lateinit var storage: Storage
         lateinit var exportManager: ExportManager
+        lateinit var languageManager: LanguageManager
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         storage = Storage(this)
         exportManager = ExportManager(this)
+        languageManager = LanguageManager(this)
         taskList = storage.loadData()
         val timerFragment = TimerFragment()
         val viewListFragment = ViewListFragment()
@@ -84,42 +84,11 @@ class MainActivity : AppCompatActivity() {
                     setCurrentFragment(settingsFragment)
                     currentFragment = Fragments.SETTINGS
                 }
-                R.id.language_selection -> changeLanguage()
             }
             true
         }
 
-        loadLocale()
-    }
-
-    private fun changeLanguage() {
-        loadLocale()
-        val languages = arrayOf("German", "Russian", "English")
-
-        val langSelectorBuilder = AlertDialog.Builder(this@MainActivity)
-        langSelectorBuilder.setTitle("Select Language: ")
-        langSelectorBuilder.setSingleChoiceItems(languages, -1) { dialog, selection ->
-            when (selection) {
-                0 -> {
-                    setLocale("de")
-                }
-                1 -> {
-                    setLocale("ru")
-                }
-                2 -> {
-                    setLocale("en")
-                }
-            }
-            recreateActivity()
-            dialog.dismiss()
-        }
-        langSelectorBuilder.create().show()
-    }
-
-    // Call this method when you want to recreate this activity.
-    private fun recreateActivity() {
-        isActivityRecreated = true
-        recreate()
+        languageManager.loadLocale()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -128,29 +97,17 @@ class MainActivity : AppCompatActivity() {
         outState.putInt("PREV_FRAGMENT", currentFragment.ordinal)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun setLocale(localeToSet: String) {
-        val localeListToSet = LocaleList(Locale(localeToSet))
-        LocaleList.setDefault(localeListToSet)
-        resources.configuration.setLocales(localeListToSet)
-        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
-        sharedPref.putString("locale_to_set", localeToSet)
-        sharedPref.apply()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun loadLocale() {
-        val sharedPref = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val localeToSet: String = sharedPref.getString("locale_to_set", "")!!
-        setLocale(localeToSet)
-    }
-
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment, fragment)
             commit()
         }
+
+    // Call this method when you want to recreate this activity.
+    fun recreateActivity() {
+        isActivityRecreated = true
+        recreate()
+    }
 
     fun openResetDataDialogue() {
         val resetBuilder = AlertDialog.Builder(this@MainActivity)
@@ -167,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         storage.deleteData()
         taskList.clear()
         Locale.setDefault(Locale.ENGLISH)
-        setLocale("en")
+        languageManager.setLocale("en")
         recreateActivity()
     }
 }
