@@ -7,11 +7,17 @@
     <string name="second_fragment_label">label zweites fragment</string>
     <string name="next">nächstes</string>
     <string name="previous">vorheriges</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
 
     <string name="hello_first_fragment">hallo erstes fragment</string>
     <string name="hello_second_fragment">hallo zweites fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">hallo leeres fragment</string>
+
+
+    <string name="resetConfirmation">Sind Sie sicher, dass Sie alle ihre Daten löschen möchten?</string>
+
     <string name="start">Start</string>
     <string name="stop">Stopp</string>
     <!--navbar-->
@@ -22,6 +28,7 @@
     <string name="lang_selection">Sprache</string>
     <string name="time">-- : -- : --</string>
     <string name="export">Exportieren</string>
+    <string name="reset">Reset</string>
 
     <string name="Title">Titel</string>
     <string name="EnterText">Text eingeben</string>

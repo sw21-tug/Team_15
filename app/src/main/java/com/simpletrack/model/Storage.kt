@@ -39,4 +39,10 @@ class Storage(val activity: MainActivity) {
             ArrayList()
         }
     }
+
+    fun deleteData() {
+        val localStorage = File(activity.filesDir.path + listFileName)
+        if (localStorage.exists())
+            localStorage.delete()
+    }
 }
