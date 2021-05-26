@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -35,20 +37,32 @@ class TimerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<Button>(R.id.stopButton).isEnabled = false
 
-        val languages = resources.getStringArray(R.array.Languages)
+        val taskTypes = resources.getStringArray(R.array.TaskTypes)
 
         val spinner = view.findViewById<Spinner>(R.id.taskDropdown)
         if (spinner != null) {
             val adapter = context?.let {
                 ArrayAdapter(
                     it,
-                    android.R.layout.simple_spinner_item, languages
+                    android.R.layout.simple_spinner_item, taskTypes
                 )
             }
             spinner.adapter = adapter
 
             if (adapter != null) {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                if (selectedItem == taskTypes[taskTypes.size - 1]) {
+                    requireView().findViewById<EditText>(R.id.customTasknameInput).visibility = View.VISIBLE
+                }
+            } // to close the onItemSelected
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
             }
         }
 
@@ -61,13 +75,12 @@ class TimerFragment : Fragment() {
                                 return@Runnable
                             }
 
-                            this@TimerFragment.requireActivity().runOnUiThread(
-                                java.lang.Runnable {
-                                    if (getView() != null) {
-                                        requireView().findViewById<TextView>(R.id.timer).text = MainActivity.currentTask!!.getTimeAsString()
-                                    }
+                            this@TimerFragment.requireActivity().runOnUiThread {
+                                if (getView() != null) {
+                                    requireView().findViewById<TextView>(R.id.timer).text =
+                                        MainActivity.currentTask!!.getTimeAsString()
                                 }
-                            )
+                            }
                             Thread.sleep(100)
                         }
                     } catch (e: Exception) {

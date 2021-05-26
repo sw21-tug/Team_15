@@ -33,12 +33,14 @@
     <string name="EnterText">Enter Text</string>
     <string name="OK">OK</string>
     <string name="Cancel">Cancel</string>
+    <string name="customTask">Your Taskname</string>
 
-    <string-array name="Languages">
+    <string-array name="TaskTypes">
         <item>Work</item>
         <item>Meeting</item>
         <item>Break</item>
         <item>Sport</item>
         <item>Party</item>
+        <item>other..</item>
     </string-array>
 </resources>
