@@ -12,7 +12,7 @@ import com.simpletrack.model.Task
 import com.simpletrack.view.SettingsFragment
 import com.simpletrack.view.TimerFragment
 import com.simpletrack.view.ViewListFragment
-import java.util.*
+import java.util.Locale
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         storage.deleteData()
         taskList.clear()
         Locale.setDefault(Locale.ENGLISH)
-        setLocale("en")
+        languageManager.setLocale("en")
         recreateActivity()
     }
 }

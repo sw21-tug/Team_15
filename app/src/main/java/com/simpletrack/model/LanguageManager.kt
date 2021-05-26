@@ -41,7 +41,7 @@ class LanguageManager(val activity: MainActivity) {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun setLocale(localeToSet: String) {
+    fun setLocale(localeToSet: String) {
         val localeListToSet = LocaleList(Locale(localeToSet))
         LocaleList.setDefault(localeListToSet)
         activity.resources.configuration.setLocales(localeListToSet)
