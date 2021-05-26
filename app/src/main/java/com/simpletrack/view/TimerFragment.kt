@@ -55,12 +55,14 @@ class TimerFragment : Fragment() {
         }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 val selectedItem = parent.getItemAtPosition(position).toString()
                 if (selectedItem == taskTypes[taskTypes.size - 1]) {
                     requireView().findViewById<EditText>(R.id.customTasknameInput).visibility = View.VISIBLE
+                } else {
+                    requireView().findViewById<EditText>(R.id.customTasknameInput).visibility = View.INVISIBLE
                 }
-            } // to close the onItemSelected
+            }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
@@ -99,7 +101,11 @@ class TimerFragment : Fragment() {
 
         view.findViewById<Button>(R.id.stopButton).setOnClickListener {
             MainActivity.currentTask!!.stopTime()
-            MainActivity.currentTask!!.name = spinner.selectedItem.toString()
+            if (spinner.selectedItem == taskTypes[taskTypes.size - 1]) {
+                MainActivity.currentTask!!.name = requireView().findViewById<EditText>(R.id.customTasknameInput).text.toString()
+            } else {
+                MainActivity.currentTask!!.name = spinner.selectedItem.toString()
+            }
             if (MainActivity.currentTask!!.isStopped()) {
                 MainActivity.taskList.add(MainActivity.currentTask!!)
                 MainActivity.storage.storeData(MainActivity.taskList)
