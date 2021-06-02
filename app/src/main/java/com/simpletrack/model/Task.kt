@@ -10,6 +10,7 @@ class Task(var name: String = "Taskname") : Serializable {
         private set
     var stop: LocalDateTime? = null
         private set
+    var pauses: MutableList<Pause> = ArrayList()
 
     constructor(start_: LocalDateTime, stop_: LocalDateTime, name_: String = "Taskname") : this() {
         start = start_
@@ -72,5 +73,24 @@ class Task(var name: String = "Taskname") : Serializable {
         if (isStopped())
             return "$name; ${start?.toString()}; ${stop?.toString()}; ${getTimeAsString()}\n"
         return ""
+    }
+
+    fun getFullPauseTime(): Duration {
+        return Duration.ZERO
+    }
+}
+
+class Pause() : Serializable {
+    var start: LocalDateTime? = null
+        private set
+    var stop: LocalDateTime? = null
+        private set
+
+    constructor(start_: LocalDateTime) : this() {
+        start = start_
+    }
+
+    fun getPauseTime(): Duration {
+        return Duration.ZERO
     }
 }
