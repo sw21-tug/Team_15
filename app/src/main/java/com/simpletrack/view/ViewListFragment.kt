@@ -5,11 +5,14 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputType
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.ListView
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.simpletrack.MainActivity
@@ -21,7 +24,7 @@ class ViewListFragment : Fragment() {
     companion object {
         fun newInstance() = ViewListFragment()
     }
-
+    private val detailFragment = TaskDetailFragment.newInstance()
     private lateinit var viewModel: ViewListViewModel
 
     private lateinit var listView: ListView
@@ -35,6 +38,7 @@ class ViewListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         listView = view.findViewById(R.id.listView)
 
@@ -42,7 +46,15 @@ class ViewListFragment : Fragment() {
         listView.adapter = listAdapter
 
         listView.setOnItemClickListener { parent, view, position, id ->
-            val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(this.context)
+            val popupView = LayoutInflater.from(activity).inflate(R.layout.task_detail_fragment, null)
+            val popupWindow = PopupWindow(
+                popupView,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+            /*val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(this.context)
             builder.setTitle(R.string.Title)
 
             val input = EditText(this.context)
@@ -61,7 +73,7 @@ class ViewListFragment : Fragment() {
                 }
             )
             builder.setNegativeButton(R.string.Cancel, DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
-            builder.show()
+            builder.show()*/
         }
     }
 
