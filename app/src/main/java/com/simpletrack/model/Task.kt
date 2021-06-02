@@ -11,6 +11,8 @@ class Task(var name: String = "Taskname") : Serializable {
     var stop: LocalDateTime? = null
         private set
     var pauses: MutableList<Pause> = ArrayList()
+    var fullPauseTime: Duration = Duration.ZERO
+        private set
 
     constructor(start_: LocalDateTime, stop_: LocalDateTime, name_: String = "Taskname") : this() {
         start = start_
@@ -38,8 +40,8 @@ class Task(var name: String = "Taskname") : Serializable {
 
     fun getDuration(): Duration {
         return when {
-            running() -> Duration.between(start, LocalDateTime.now())
-            isStopped() -> Duration.between(start, stop)
+            running() -> Duration.between(start, LocalDateTime.now()) - fullPauseTime
+            isStopped() -> Duration.between(start, stop) - fullPauseTime
             else -> Duration.ZERO
         }
     }
@@ -75,16 +77,21 @@ class Task(var name: String = "Taskname") : Serializable {
         return ""
     }
 
-    fun getFullPauseTime(): Duration {
-        return Duration.ZERO
+    fun addPause(pause: Pause) {
+        pauses.add(pause)
+    }
+
+    fun endPause() {
+        pauses[pauses.size - 1].stop = LocalDateTime.now()
+        fullPauseTime += Duration.between(pauses[pauses.size - 1].start, pauses[pauses.size - 1].stop)
     }
 }
 
 class Pause() : Serializable {
     var start: LocalDateTime? = null
-        private set
+        set
     var stop: LocalDateTime? = null
-        private set
+        set
 
     constructor(start_: LocalDateTime) : this() {
         start = start_
