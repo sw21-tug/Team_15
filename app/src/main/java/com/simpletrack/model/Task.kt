@@ -10,7 +10,7 @@ class Task(var name: String = "Taskname") : Serializable {
         private set
     var stop: LocalDateTime? = null
         private set
-    var pauses: MutableList<Pause> = ArrayList()
+    var pauses = ArrayList<Pause>()
 
     constructor(start_: LocalDateTime, stop_: LocalDateTime, name_: String = "Taskname") : this() {
         start = start_
@@ -80,7 +80,7 @@ class Task(var name: String = "Taskname") : Serializable {
     }
 }
 
-class Pause() : Serializable {
+class Pause(var name: String = "Pausename") : Serializable {
     var start: LocalDateTime? = null
         private set
     var stop: LocalDateTime? = null
