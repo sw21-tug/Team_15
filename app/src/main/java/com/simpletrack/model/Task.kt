@@ -41,6 +41,7 @@ class Task(var name: String = "Taskname") : Serializable {
     fun getDuration(): Duration {
         return when {
             running() -> Duration.between(start, LocalDateTime.now()) - fullPauseTime
+            isPaused() -> Duration.between(start, pauses[pauses.size - 1].start) - fullPauseTime
             isStopped() -> Duration.between(start, stop) - fullPauseTime
             else -> Duration.ZERO
         }
@@ -53,14 +54,21 @@ class Task(var name: String = "Taskname") : Serializable {
         if (!running())
             return
         stop = LocalDateTime.now()
+        if (isPaused()) {
+            endPause(stop)
+        }
     }
 
     fun isStopped(): Boolean {
         return start != null && stop != null
     }
 
+    fun isPaused(): Boolean {
+        return pauses.size > 0 && pauses[pauses.size - 1].stop == null
+    }
+
     fun running(): Boolean {
-        return start != null && stop == null
+        return start != null && stop == null && !isPaused()
     }
 
     override fun toString(): String {
@@ -83,7 +91,12 @@ class Task(var name: String = "Taskname") : Serializable {
 
     fun endPause() {
         pauses[pauses.size - 1].stop = LocalDateTime.now()
-        fullPauseTime += Duration.between(pauses[pauses.size - 1].start, pauses[pauses.size - 1].stop)
+        fullPauseTime += pauses[pauses.size - 1].getPauseTime()
+    }
+
+    fun endPause(end: LocalDateTime?) {
+        pauses[pauses.size - 1].stop = end
+        fullPauseTime += Duration.between(pauses[pauses.size - 1].start, end)
     }
 }
 
@@ -98,6 +111,9 @@ class Pause() : Serializable {
     }
 
     fun getPauseTime(): Duration {
-        return Duration.ZERO
+        if (start == null || stop == null) {
+            return Duration.ZERO
+        }
+        return Duration.between(start, stop)
     }
 }

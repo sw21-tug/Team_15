@@ -4,14 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.simpletrack.MainActivity
 import com.simpletrack.R
+import com.simpletrack.model.TimerButtonState
 import com.simpletrack.model.TimerViewModel
 
 class TimerFragment : Fragment() {
@@ -36,9 +33,8 @@ class TimerFragment : Fragment() {
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
         }
         MainActivity.currentTask?.let {
-            if (MainActivity.currentTask!!.running()) {
-                view.findViewById<Button>(R.id.startButton).isEnabled = false
-                view.findViewById<Button>(R.id.stopButton).isEnabled = true
+            if (MainActivity.currentTask!!.running() || MainActivity.currentTask!!.isPaused()) {
+                viewModel!!.updateUi()
                 viewModel!!.continueTimer()
             }
         }
