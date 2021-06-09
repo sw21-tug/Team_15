@@ -34,9 +34,13 @@
     <string name="EnterText">Введите текст</string>
     <string name="OK">OK</string>
     <string name="Cancel">Отмена</string>
-    <string name="customTask">Your Taskname</string>
-    <string name="pause">Pause</string>
-    <string name="Continue">Continue</string>
+    <string name="customTask">Ваше имя задачи</string>
+    <string name="pause">Пауза</string>
+    <string name="pause_popup">Перерывы</string>
+    <string name="Continue">Продолжать</string>
+    <string name="Delete">Удалить</string>
+    <string name="Close">Закрыть</string>
+    <string name="SelectLanguage">выберите язык: </string>
 
     <string-array name="TaskTypes">
         <item>Работа</item>

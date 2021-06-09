@@ -30,13 +30,18 @@
     <string name="export">Exportieren</string>
     <string name="reset">Reset</string>
 
-    <string name="Title">Titel</string>
+    <string name="Title">Bearbeiten</string>
     <string name="EnterText">Text eingeben</string>
     <string name="OK">OK</string>
     <string name="Cancel">Abbrechen</string>
     <string name="customTask">Your Taskname</string>
     <string name="pause">Pause</string>
+    <string name="pause_popup">Pausen</string>
     <string name="Continue">Weiter</string>
+    <string name="Delete">Löschen</string>
+    <string name="Close">Schließen</string>
+    <string name="SelectLanguage">Sprache auswählen: </string>
+
 
     <string-array name="TaskTypes">
         <item>Arbeit</item>

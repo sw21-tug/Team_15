@@ -100,7 +100,7 @@ class Task(var name: String = "Taskname") : Serializable {
     }
 }
 
-class Pause() : Serializable {
+class Pause(var name: String = "Pausename") : Serializable {
     var start: LocalDateTime? = null
         set
     var stop: LocalDateTime? = null

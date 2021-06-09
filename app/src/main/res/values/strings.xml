@@ -29,13 +29,17 @@
     <string name="export">Export</string>
     <string name="reset">Reset</string>
 
-    <string name="Title">Title</string>
+    <string name="Title">Edit</string>
     <string name="EnterText">Enter Text</string>
     <string name="OK">OK</string>
     <string name="Cancel">Cancel</string>
     <string name="customTask">Your Taskname</string>
     <string name="pause">Pause</string>
+    <string name="pause_popup">Pauses</string>
     <string name="Continue">Continue</string>
+    <string name="Delete">Delete</string>
+    <string name="Close">Close</string>
+    <string name="SelectLanguage">Select language: </string>
 
     <string-array name="TaskTypes">
         <item>Work</item>
