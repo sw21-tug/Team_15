@@ -54,29 +54,20 @@ class TimerViewModel(val timerFragment: TimerFragment) {
         when (buttonState) {
             TimerButtonState.START -> {
                 startTimerThread()
-
                 timerThread.start()
 
                 MainActivity.currentTask = Task("Task ${MainActivity.taskList.size + 1}")
                 MainActivity.currentTask!!.startTime()
-                timerFragment.view?.findViewById<Button>(R.id.stopButton)?.isEnabled = true
-                startButton.isEnabled = true
-                startButton.setText(R.string.pause)
                 buttonState = TimerButtonState.PAUSE
+                updateUi()
             }
             TimerButtonState.PAUSE -> {
-                // stop timer
-                // timerThread.interrupt()
-                MainActivity.currentTask?.addPause(Pause(LocalDateTime.now()))
-                startButton.setText(R.string.Continue)
                 buttonState = TimerButtonState.CONTINUE
+                updateUi()
             }
             TimerButtonState.CONTINUE -> {
-                // start timer
-                // startTimerThread()
-                MainActivity.currentTask?.endPause()
-                startButton.setText(R.string.pause)
                 buttonState = TimerButtonState.PAUSE
+                updateUi()
             }
         }
     }

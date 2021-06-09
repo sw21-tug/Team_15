@@ -35,9 +35,9 @@ class TimerFragment : Fragment() {
             viewModel = TimerViewModel(this)
             view.findViewById<Button>(R.id.stopButton).isEnabled = false
         }
+        viewModel!!.updateUi()
         MainActivity.currentTask?.let {
             if (MainActivity.currentTask!!.running() || MainActivity.currentTask!!.isPaused()) {
-                viewModel!!.updateUi()
                 viewModel!!.continueTimer()
             }
         }
