@@ -40,6 +40,8 @@
     <string name="Continue">Weiter</string>
     <string name="Delete">Löschen</string>
     <string name="Close">Schließen</string>
+    <string name="SelectLanguage">Sprache auswählen: </string>
+
 
     <string-array name="TaskTypes">
         <item>Arbeit</item>

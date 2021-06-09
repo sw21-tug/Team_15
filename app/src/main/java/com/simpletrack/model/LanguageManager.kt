@@ -6,7 +6,9 @@ import android.os.LocaleList
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.simpletrack.MainActivity
+import com.simpletrack.R
 import java.util.Locale
+
 
 class LanguageManager(val activity: MainActivity) {
     fun changeLanguage() {
@@ -14,7 +16,7 @@ class LanguageManager(val activity: MainActivity) {
         val languages = arrayOf("German", "Russian", "English")
 
         val langSelectorBuilder = AlertDialog.Builder(activity)
-        langSelectorBuilder.setTitle("Select Language: ")
+        langSelectorBuilder.setTitle(R.string.SelectLanguage)
         langSelectorBuilder.setSingleChoiceItems(languages, -1) { dialog, selection ->
             when (selection) {
                 0 -> {

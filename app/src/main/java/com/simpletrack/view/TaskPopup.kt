@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentActivity
 import com.simpletrack.MainActivity
 import com.simpletrack.R
 import com.simpletrack.model.Pause
-import com.simpletrack.model.Task
 import java.time.format.DateTimeFormatter
 
 class TaskPopup(val activity: FragmentActivity, val view: View, val taskIndex: Int, val listAdapter: ListAdapter) {
@@ -44,7 +43,7 @@ class TaskPopup(val activity: FragmentActivity, val view: View, val taskIndex: I
         val deleteButton = popupView.findViewById<Button>(R.id.button_delete)
         val closeButton = popupView.findViewById<Button>(R.id.button_close)
 
-        titleText.setText(task.name)
+        titleText.setText(task.name + "\u270E")
         durationText.text = "%.1f h".format(task.getDuration().toMinutes().toDouble() / (60.toDouble()))
         startDateText.text = task.start?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         startTimeText.text = task.start?.format(DateTimeFormatter.ofPattern("HH:mm"))

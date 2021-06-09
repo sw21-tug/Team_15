@@ -39,7 +39,7 @@
     <string name="Continue">Continue</string>
     <string name="Delete">Delete</string>
     <string name="Close">Close</string>
-
+    <string name="SelectLanguage">Select language: </string>
 
     <string-array name="TaskTypes">
         <item>Work</item>

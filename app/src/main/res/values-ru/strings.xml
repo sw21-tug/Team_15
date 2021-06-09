@@ -40,6 +40,7 @@
     <string name="Continue">Продолжать</string>
     <string name="Delete">Удалить</string>
     <string name="Close">Закрыть</string>
+    <string name="SelectLanguage">выберите язык: </string>
 
     <string-array name="TaskTypes">
         <item>Работа</item>
