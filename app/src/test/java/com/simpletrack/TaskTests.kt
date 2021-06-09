@@ -10,6 +10,27 @@ import java.time.LocalDateTime
 class TaskTests {
 
     @Test
+    fun test_full_pause_time() {
+        val sleepTime: Long = 1000
+        val epsilon: Long = 20
+        val task = Task()
+
+        task.startTime()
+        task.addPause(Pause(LocalDateTime.now()))
+        sleep(sleepTime)
+        task.endPause()
+        task.addPause(Pause(LocalDateTime.now()))
+        sleep(sleepTime)
+        task.endPause()
+        task.addPause(Pause(LocalDateTime.now()))
+        sleep(sleepTime)
+        task.endPause()
+        task.stopTime()
+
+        assert(task.fullPauseTime.toMillis() >= 3 * sleepTime - epsilon && task.fullPauseTime.toMillis() <= 3 * sleepTime + epsilon)
+    }
+
+    @Test
     fun get_pause_time_test() {
         val sleepTime: Long = 1000
         val epsilon: Long = 20
