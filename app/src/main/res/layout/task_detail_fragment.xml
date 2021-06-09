@@ -15,7 +15,9 @@
         android:scrollbars="vertical"
         android:verticalScrollbarPosition="right">
 
-        <TextView
+
+
+        <EditText
             android:id="@+id/taskName"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -116,7 +118,7 @@
             android:layout_column="0"
             android:layout_columnWeight="1"
             android:paddingStart="15dp"
-            android:text="Pauses"
+            android:text="@string/pause_popup"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -135,7 +137,7 @@
 
     <ListView
         android:id="@+id/pauseList"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="100"></ListView>
 
@@ -143,13 +145,13 @@
         android:id="@+id/button_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete" />
+        android:text="@string/Delete" />
 
     <Button
         android:id="@+id/button_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Close" />
+        android:text="@string/Close" />
 
 
 </LinearLayout>

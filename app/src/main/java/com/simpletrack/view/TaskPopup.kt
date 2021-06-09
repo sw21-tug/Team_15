@@ -4,11 +4,7 @@ import android.app.Activity
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.FragmentActivity
 import com.simpletrack.R
 import com.simpletrack.model.Pause
@@ -27,7 +23,7 @@ class TaskPopup(val activity: FragmentActivity, val view: View, val task: Task, 
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
-        val titleText = popupView.findViewById<TextView>(R.id.taskName)
+        val titleText = popupView.findViewById<EditText>(R.id.taskName)
         val durationText = popupView.findViewById<TextView>(R.id.duration)
         val startDateText = popupView.findViewById<TextView>(R.id.startDate)
         val startTimeText = popupView.findViewById<TextView>(R.id.startTime)
@@ -43,7 +39,7 @@ class TaskPopup(val activity: FragmentActivity, val view: View, val task: Task, 
         val deleteButton = popupView.findViewById<Button>(R.id.button_delete)
         val closeButton = popupView.findViewById<Button>(R.id.button_close)
 
-        titleText.text = task.name
+        titleText.setText(task.name)
         durationText.text = "%.1f h".format(task.getDuration().toMinutes().toDouble() / (60.toDouble()))
         startDateText.text = task.start?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         startTimeText.text = task.start?.format(DateTimeFormatter.ofPattern("HH:mm"))

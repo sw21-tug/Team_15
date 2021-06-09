@@ -36,7 +36,10 @@
     <string name="Cancel">Abbrechen</string>
     <string name="customTask">Your Taskname</string>
     <string name="pause">Pause</string>
+    <string name="pause_popup">Pausen</string>
     <string name="Continue">Weiter</string>
+    <string name="Delete">Löschen</string>
+    <string name="Close">Schließen</string>
 
     <string-array name="TaskTypes">
         <item>Arbeit</item>

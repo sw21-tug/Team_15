@@ -1,10 +1,13 @@
 package com.simpletrack.view
 
 import android.app.Activity
+import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
+import com.google.android.material.textview.MaterialTextView
 import com.simpletrack.R
 import com.simpletrack.model.Pause
 import java.time.format.DateTimeFormatter
@@ -24,7 +27,11 @@ class PauseAdapter(private val context: Activity, private val pause_list: ArrayL
         val endTimeText = rowView.findViewById(R.id.endTime) as TextView
 
         titleText.text = pause_list[position].name
+        titleText.typeface = Typeface.defaultFromStyle(Typeface.ITALIC)
+        titleText.textSize = 23.toFloat()
         durationText.text = "%.1f h".format(pause_list[position].getPauseTime().toMinutes().toDouble() / (60.toDouble()))
+        durationText.typeface = Typeface.defaultFromStyle(Typeface.ITALIC)
+        durationText.textSize = 23.toFloat()
         startDateText.text = pause_list[position].start?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         startTimeText.text = pause_list[position].start?.format(DateTimeFormatter.ofPattern("HH:mm"))
         endDateText.text = pause_list[position].stop?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
