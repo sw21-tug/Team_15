@@ -35,6 +35,8 @@
     <string name="OK">OK</string>
     <string name="Cancel">Abbrechen</string>
     <string name="customTask">Your Taskname</string>
+    <string name="pause">Pause</string>
+    <string name="Continue">Weiter</string>
 
     <string-array name="TaskTypes">
         <item>Arbeit</item>
