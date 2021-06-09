@@ -7,11 +7,17 @@
     <string name="second_fragment_label">label zweites fragment</string>
     <string name="next">nächstes</string>
     <string name="previous">vorheriges</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
 
     <string name="hello_first_fragment">hallo erstes fragment</string>
     <string name="hello_second_fragment">hallo zweites fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">hallo leeres fragment</string>
+
+
+    <string name="resetConfirmation">Sind Sie sicher, dass Sie alle ihre Daten löschen möchten?</string>
+
     <string name="start">Start</string>
     <string name="stop">Stopp</string>
     <!--navbar-->
@@ -20,6 +26,29 @@
     <string name="list">Liste</string>
     <string name="settings">Einstellungen</string>
     <string name="lang_selection">Sprache</string>
-    <string name="time">00:00:00</string>
+    <string name="time">-- : -- : --</string>
+    <string name="export">Exportieren</string>
+    <string name="reset">Reset</string>
 
+    <string name="Title">Bearbeiten</string>
+    <string name="EnterText">Text eingeben</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Abbrechen</string>
+    <string name="customTask">Your Taskname</string>
+    <string name="pause">Pause</string>
+    <string name="pause_popup">Pausen</string>
+    <string name="Continue">Weiter</string>
+    <string name="Delete">Löschen</string>
+    <string name="Close">Schließen</string>
+    <string name="SelectLanguage">Sprache auswählen: </string>
+
+
+    <string-array name="TaskTypes">
+        <item>Arbeit</item>
+        <item>Konferenz</item>
+        <item>Pause</item>
+        <item>Sport</item>
+        <item>Feiern</item>
+        <item>anderes..</item>
+    </string-array>
 </resources>

@@ -7,11 +7,17 @@
     <string name="second_fragment_label">Второй фрагмент</string>
     <string name="next">Следующий</string>
     <string name="previous">Предыдущий</string>
+    <string name="yes">да</string>
+    <string name="no">Нет</string>
 
     <string name="hello_first_fragment">Привет первый фрагмент</string>
     <string name="hello_second_fragment">Привет второй фрагмент. Аргумент:% 1 $ s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+
+
+    <string name="resetConfirmation">Вы уверены, что хотите удалить все свои данные?</string>
+
     <string name="start">Начало</string>
     <string name="stop">останавливаться</string>
     <!--navbar-->
@@ -20,6 +26,28 @@
     <string name="list">список</string>
     <string name="settings">Настройки</string>
     <string name="lang_selection">выберите язык</string>
-    <string name="time">00:00:00</string>
+    <string name="time">-- : -- : --</string>
+    <string name="export">экспорт</string>
+    <string name="reset">Сброс настроек</string>
 
+    <string name="Title">Заголовок</string>
+    <string name="EnterText">Введите текст</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Отмена</string>
+    <string name="customTask">Ваше имя задачи</string>
+    <string name="pause">Пауза</string>
+    <string name="pause_popup">Перерывы</string>
+    <string name="Continue">Продолжать</string>
+    <string name="Delete">Удалить</string>
+    <string name="Close">Закрыть</string>
+    <string name="SelectLanguage">выберите язык: </string>
+
+    <string-array name="TaskTypes">
+        <item>Работа</item>
+        <item>Встреча</item>
+        <item>Перерыв</item>
+        <item>Спорт</item>
+        <item>Вечеринка</item>
+        <item>xxx</item>
+    </string-array>
 </resources>

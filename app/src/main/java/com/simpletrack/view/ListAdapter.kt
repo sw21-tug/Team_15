@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.simpletrack.MainActivity
 import com.simpletrack.R
 import com.simpletrack.model.Task
 import java.time.format.DateTimeFormatter
@@ -30,5 +31,10 @@ class ListAdapter(private val context: Activity, private val task_list: ArrayLis
         endDateText.text = task_list[position].stop?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         endTimeText.text = task_list[position].stop?.format(DateTimeFormatter.ofPattern("HH:mm"))
         return rowView
+    }
+
+    override fun remove(`object`: Task?) {
+        super.remove(`object`)
+        MainActivity.storage.storeData(task_list)
     }
 }
