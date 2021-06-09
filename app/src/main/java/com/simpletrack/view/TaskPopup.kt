@@ -7,7 +7,12 @@ import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ListView
+import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.simpletrack.MainActivity
 import com.simpletrack.R

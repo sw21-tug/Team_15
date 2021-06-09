@@ -5,9 +5,7 @@ import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.TextView
-import com.google.android.material.textview.MaterialTextView
 import com.simpletrack.R
 import com.simpletrack.model.Pause
 import java.time.format.DateTimeFormatter

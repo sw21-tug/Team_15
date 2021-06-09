@@ -9,7 +9,6 @@ import com.simpletrack.MainActivity
 import com.simpletrack.R
 import java.util.Locale
 
-
 class LanguageManager(val activity: MainActivity) {
     fun changeLanguage() {
         loadLocale()
