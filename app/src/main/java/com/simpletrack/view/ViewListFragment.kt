@@ -58,6 +58,7 @@ class ViewListFragment : Fragment() {
                 DialogInterface.OnClickListener { dialog, which ->
                     m_Text = input.text.toString()
                     MainActivity.taskList[position].setNewName(m_Text)
+                    MainActivity.storage.storeData(MainActivity.taskList)
                 }
             )
             builder.setNegativeButton(R.string.Cancel, DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
