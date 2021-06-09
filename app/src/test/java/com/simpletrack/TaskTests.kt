@@ -1,5 +1,6 @@
 package com.simpletrack
 
+import com.simpletrack.model.Pause
 import com.simpletrack.model.Task
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -7,6 +8,37 @@ import java.lang.Thread.sleep
 import java.time.LocalDateTime
 
 class TaskTests {
+
+    @Test
+    fun get_pause_time_test() {
+        val sleepTime: Long = 1000
+        val epsilon: Long = 20
+        val task = Task()
+
+        val pause = Pause(LocalDateTime.now())
+        task.addPause(pause)
+        sleep(sleepTime)
+        task.endPause()
+
+        assert(pause.getPauseTime().toMillis() >= sleepTime - epsilon && pause.getPauseTime().toMillis() <= sleepTime + epsilon)
+    }
+
+    @Test
+    fun pause_time_correct() {
+        val sleepTime: Long = 1000
+        val epsilon: Long = 20
+        val task = Task()
+
+        task.startTime()
+        sleep(sleepTime)
+        task.addPause(Pause(LocalDateTime.now()))
+        sleep(sleepTime)
+        task.endPause()
+        task.stopTime()
+
+        assert(task.getDuration().toMillis() >= sleepTime - epsilon && task.getDuration().toMillis() <= sleepTime + epsilon)
+    }
+
     @Test
     fun timeCount_isCorrect() {
         val sleepTime: Long = 1000

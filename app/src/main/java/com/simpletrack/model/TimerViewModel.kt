@@ -62,10 +62,12 @@ class TimerViewModel(val timerFragment: TimerFragment) {
                 updateUi()
             }
             TimerButtonState.PAUSE -> {
+                MainActivity.currentTask?.addPause(Pause(LocalDateTime.now()))
                 buttonState = TimerButtonState.CONTINUE
                 updateUi()
             }
             TimerButtonState.CONTINUE -> {
+                MainActivity.currentTask?.endPause()
                 buttonState = TimerButtonState.PAUSE
                 updateUi()
             }
