@@ -11,6 +11,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import com.simpletrack.R
+import com.simpletrack.model.Pause
 import com.simpletrack.model.Task
 import java.time.format.DateTimeFormatter
 
@@ -37,7 +38,7 @@ class TaskPopup(val activity: FragmentActivity, val view: View, val task: Task, 
         // Pause
         val duration2Text = popupView.findViewById<TextView>(R.id.duration2)
         val listView = popupView.findViewById<ListView>(R.id.pauseList)
-        listView.adapter = PauseAdapter(this.activity as Activity, task.pauses)
+        listView.adapter = PauseAdapter(this.activity as Activity, task.pauses as ArrayList<Pause>)
 
         val deleteButton = popupView.findViewById<Button>(R.id.button_delete)
         val closeButton = popupView.findViewById<Button>(R.id.button_close)
@@ -48,9 +49,9 @@ class TaskPopup(val activity: FragmentActivity, val view: View, val task: Task, 
         startTimeText.text = task.start?.format(DateTimeFormatter.ofPattern("HH:mm"))
         endDateText.text = task.stop?.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
         endTimeText.text = task.stop?.format(DateTimeFormatter.ofPattern("HH:mm"))
-        sumText.text = "%.1f h".format(task.getDuration().plus(task.getFullPauseTime()).toMinutes().toDouble() / (60.toDouble()))
+        sumText.text = "%.1f h".format(task.getDuration().plus(task.fullPauseTime).toMinutes().toDouble() / (60.toDouble()))
 
-        duration2Text.text = "%.1f h".format(task.getFullPauseTime().toMinutes().toDouble() / (60.toDouble()))
+        duration2Text.text = "%.1f h".format(task.fullPauseTime.toMinutes().toDouble() / (60.toDouble()))
 
         closeButton.setOnClickListener {
             popupWindow.dismiss()
