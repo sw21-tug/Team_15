@@ -39,7 +39,7 @@ class ViewListFragment : Fragment() {
         listView.adapter = listAdapter
 
         listView.setOnItemClickListener { parent, view, position, id ->
-            val popup = TaskPopup(requireActivity(), view, MainActivity.taskList[position], listAdapter)
+            val popup = TaskPopup(requireActivity(), view, position, listAdapter)
             popup.display()
             /*val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(this.context)
             builder.setTitle(R.string.Title)
